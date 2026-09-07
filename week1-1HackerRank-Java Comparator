@@ -1,0 +1,67 @@
+import java.io.*; 
+import java.util.*; 
+import java.math.*;
+
+public class Solution {
+
+public static class Player {
+private String name;
+private int score;
+
+public Player(String name, int score) {
+    this.name = name;
+    this.score = score;
+}
+
+public String getName() {
+    return name;
+}
+
+public void setName(String name) {
+    this.name = name;
+}
+
+public int getScore() {
+    return score;
+}
+
+public void setScore(int score) {
+    this.score = score;
+}
+}
+
+public static class Checker implements Comparator<Player> {
+@Override
+public int compare(Player a, Player b) { if (a.getScore() != b.getScore()) { return b.getScore() - a.getScore(); } return a.getName().compareTo(b.getName()); } }
+
+public static void main(String[] args) {
+    Scanner input = new Scanner(System.in);
+    int count = Integer.parseInt(input.nextLine().trim());
+    Player[] playersList = new Player[count];
+    int i = 0;
+    while(i<count){
+    String[] part = input.nextLine().trim().split("\\s+");
+    playersList[i] = new Player(part[0],Integer.parseInt(part[1]));  
+    i++;
+    }
+    Checker checker = new Checker();
+    Arrays.sort(playersList,checker);
+    for(Player p: playersList){
+        System.out.println(p.getName()+" "+p.getScore());
+    }
+    input.close();
+} }
+
+input 
+5
+amy 100
+david 100
+heraldo 50
+aakansha 75
+aleksa 150
+Output 
+aleksa 150
+amy 100
+david 100
+aakansha 75
+heraldo 50
