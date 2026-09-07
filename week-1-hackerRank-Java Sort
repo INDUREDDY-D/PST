@@ -1,0 +1,60 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+class Student {
+    protected int id;
+    protected String name;
+    protected double cgpa;
+
+    public Student(int id, String name, double cgpa) {
+        this.id = id;
+        this.name = name;
+        this.cgpa = cgpa;
+    }
+}
+
+public class Solution1 {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        List<Student> students = new ArrayList<>();
+        int n = Integer.parseInt(scanner.nextLine());
+        for (int i = 0; i < n; i++) {
+            String[] tokens = scanner.nextLine().split("\\s+");
+            int id = Integer.parseInt(tokens[0]);
+            String name = tokens[1];
+            double cgpa = Double.parseDouble(tokens[2]);
+            Student student = new Student(id, name, cgpa);
+            students.add(student);
+        }
+        scanner.close();
+
+        students.stream().sorted((s1, s2) -> {
+            if (s1.cgpa - s2.cgpa > 0) {
+                return -1;
+            } else if (s1.cgpa - s2.cgpa < 0) {
+                return 1;
+            } else if (s1.name.compareTo(s2.name) < 0) {
+                return -1;
+            } else if (s1.name.compareTo(s2.name) > 0) {
+                return 1;
+            } else {
+                return Integer.compare(s1.id, s2.id);
+            }
+        }).map(s -> s.name).forEach(System.out::println);
+    }
+}
+
+output:
+5
+33 Rumpa 3.68
+85 Ashis 3.85
+56 Samiha 3.75
+19 Samara 3.75
+22 Fahim 3.76
+Your Output (stdout)
+Ashis
+Fahim
+Samara
+Samiha
+Rumpa
