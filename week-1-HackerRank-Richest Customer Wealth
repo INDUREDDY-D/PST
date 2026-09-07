@@ -1,0 +1,26 @@
+class Solution {
+    public int maximumWealth(int[][] accounts) {
+        
+    }
+}class Solution {
+    public int maximumWealth(int[][] accounts) {
+        int maxWealth = 0;
+
+        for (int[] customer : accounts) {
+            int wealth = 0;
+
+            for (int money : customer) {
+                wealth += money;
+            }
+
+            maxWealth = Math.max(maxWealth, wealth);
+        }
+
+        return maxWealth;
+    }
+}
+
+
+input:
+accounts = [[2,8,7],[7,1,3],[1,9,5]]
+Output: 17
