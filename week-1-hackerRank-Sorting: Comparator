@@ -1,0 +1,50 @@
+import java.io.*; 
+import java.util.*;
+
+public class Solution { public static void main(String[] args) { Scanner sc=new Scanner(System.in); int n=sc.nextInt();
+
+    checker[] arr=new checker[n];
+    for(int i=0;i<n;i++){
+        String name=sc.next();
+        int no=sc.nextInt();
+        arr[i]=new checker(name,no);
+    }
+    compare(arr);
+
+    for(int i=0;i<arr.length;i++){
+        System.out.println(arr[i].name +" "+ arr[i].no);
+    }
+}
+
+public static void compare(checker[] arr){
+    Arrays.sort(arr,(o1,o2) -> {
+        int nocompar=Integer.compare(o2.no, o1.no);
+        if(nocompar == 0){
+            return o1.name.compareTo(o2.name);
+        }
+        return nocompar;
+    });
+}
+}
+
+class checker{ String name; int no;
+
+checker(String name,int no){
+    this.name=name;
+    this.no=no;
+}
+}
+
+Input (stdin)
+5
+amy 100
+david 100
+heraldo 50
+aakansha 75
+aleksa 150
+Your Output (stdout)
+aleksa 150
+amy 100
+david 100
+aakansha 75
+heraldo 50
