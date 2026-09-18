@@ -1,0 +1,61 @@
+Naive algorithm for Pattern Searching
+Last Updated :
+31 Mar, 2026
+Given a text string of length n and a pattern of length m, find all starting indices where the pattern occurs in the text.
+Note: You may assume that n>m.
+
+Examples: 
+
+Input: text = "geeksforgeeks", pattern = "geeks"
+Output:  [0, 8]
+Explanation: The string "geeks" occurs at index 0 and 8 in text.
+
+Input:  text =  "aabaacaadaabaaba", pattern = "aaba"
+Output: [0, 9,  12]
+
+kmp-algorithm-for-pattern-searching
+ 
+Naive Pattern Searching Algorithm
+The pattern moves over the text one position at a time and characters are compared. If all characters match, the index is stored; otherwise, the next position is checked.
+
+file.webpfile.webp
+
+
+import java.util.*;
+
+public class Main {
+
+    static void search(String text, String pattern) {
+        int n = text.length();
+        int m = pattern.length();
+
+        for (int i = 0; i <= n - m; i++) {
+            int j;
+
+            // Compare pattern with text
+            for (j = 0; j < m; j++) {
+                if (text.charAt(i + j) != pattern.charAt(j)) {
+                    break;
+                }
+            }
+
+            // If all characters matched
+            if (j == m) {
+                System.out.print(i + " ");
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        String text = sc.nextLine();
+        String pattern = sc.nextLine();
+
+        search(text, pattern);
+    }
+}
+
+
+Output
+0 9 12 
