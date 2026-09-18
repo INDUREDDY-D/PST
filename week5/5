@@ -1,0 +1,197 @@
+We define subsequence as any subset of an array. We define a subarray as a contiguous subsequence in an array.
+
+Given an array, find the maximum possible sum among:
+
+all nonempty subarrays.
+all nonempty subsequences.
+Print the two values as space-separated integers on one line.
+
+Note that empty subarrays/subsequences should not be considered.
+
+Example
+
+The maximum subarray sum is comprised of elements at inidices . Their sum is . The maximum subsequence sum is comprised of elements at indices  and their sum is .
+
+Function Description
+
+Complete the maxSubarray function in the editor below.
+
+maxSubarray has the following parameter(s):
+
+int arr[n]: an array of integers
+Returns
+
+int[2]: the maximum subarray and subsequence sums
+Input Format
+
+The first line of input contains a single integer , the number of test cases.
+
+The first line of each test case contains a single integer .
+The second line contains  space-separated integers  where .
+
+Constraints
+
+The subarray and subsequences you consider should have at least one element.
+
+Sample Input 0
+
+2
+4
+1 2 3 4
+6
+2 -1 2 3 4 -5
+Sample Output 0
+
+10 10
+10 11
+Explanation 0
+
+In the first case: The maximum sum for both types of subsequences is just the sum of all the elements since they are all positive.
+
+In the second case: The subarray  is the subarray with the maximum sum, and  is the subsequence with the maximum sum.
+
+Sample Input 1
+
+1
+5
+-2 -3 -1 -4 -6
+Sample Output 1
+
+-1 -1
+Explanation 1
+
+Since all of the numbers are negative, both the maximum subarray and maximum subsequence sums are made up of one element, .
+
+
+
+
+
+import java.util.*;
+
+class Result {
+
+    public static List<Integer> maxSubarray(List<Integer> arr) {
+
+        // Maximum subarray sum - Kadane's Algorithm
+        int current = arr.get(0);
+        int maxSubarray = arr.get(0);
+
+        for (int i = 1; i < arr.size(); i++) {
+            current = Math.max(arr.get(i), current + arr.get(i));
+            maxSubarray = Math.max(maxSubarray, current);
+        }
+
+        // Maximum subsequence sum
+        int maxSubsequence = 0;
+        int largest = arr.get(0);
+        boolean hasPositive = false;
+
+        for (int x : arr) {
+            if (x > 0) {
+                maxSubsequence += x;
+                hasPositive = true;
+            }
+
+            largest = Math.max(largest, x);
+        }
+
+        if (!hasPositive) {
+            maxSubsequence = largest;
+        }
+
+        return Arrays.asList(maxSubarray, maxSubsequence);
+    }
+}
+
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int t = sc.nextInt();
+
+        while (t-- > 0) {
+            int n = sc.nextInt();
+
+            List<Integer> arr = new ArrayList<>();
+
+            for (int i = 0; i < n; i++) {
+                arr.add(sc.nextInt());
+            }
+
+            List<Integer> result = Result.maxSubarray(arr);
+
+            System.out.println(result.get(0) + " " + result.get(1));
+        }
+    }
+}import java.util.*;
+
+class Result {
+
+    public static List<Integer> maxSubarray(List<Integer> arr) {
+
+        // Maximum subarray sum - Kadane's Algorithm
+        int current = arr.get(0);
+        int maxSubarray = arr.get(0);
+
+        for (int i = 1; i < arr.size(); i++) {
+            current = Math.max(arr.get(i), current + arr.get(i));
+            maxSubarray = Math.max(maxSubarray, current);
+        }
+
+        // Maximum subsequence sum
+        int maxSubsequence = 0;
+        int largest = arr.get(0);
+        boolean hasPositive = false;
+
+        for (int x : arr) {
+            if (x > 0) {
+                maxSubsequence += x;
+                hasPositive = true;
+            }
+
+            largest = Math.max(largest, x);
+        }
+
+        if (!hasPositive) {
+            maxSubsequence = largest;
+        }
+
+        return Arrays.asList(maxSubarray, maxSubsequence);
+    }
+}
+
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int t = sc.nextInt();
+
+        while (t-- > 0) {
+            int n = sc.nextInt();
+
+            List<Integer> arr = new ArrayList<>();
+
+            for (int i = 0; i < n; i++) {
+                arr.add(sc.nextInt());
+            }
+
+            List<Integer> result = Result.maxSubarray(arr);
+
+            System.out.println(result.get(0) + " " + result.get(1));
+        }
+    }
+}
+
+
+
+Input (stdin)
+2
+4
+1 2 3 4
+6
+2 -1 2 3 4 -5
+Your Output (stdout)
+10 10
+10 11
